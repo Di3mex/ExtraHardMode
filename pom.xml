@@ -1,0 +1,88 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- Project properties. -->
+    <groupId>me.ryanhamshire</groupId>
+    <artifactId>ExtraHardMode</artifactId>
+    <version>3.0.1</version>
+    <name>ExtraHardMode</name>
+    <description>New game rules and mechanics for Minecraft.</description>
+    <url>http://dev.bukkit.org/server-mods/fun-hard-mode</url>
+    <!-- Developers -->
+    <developers>
+        <developer>
+            <id>bigscary</id>
+            <url>https://github.com/ryanhamshire</url>
+        </developer>
+        <developer>
+            <id>Diemex</id>
+            <url>https://github.com/Di3mex</url>
+        </developer>
+        <developer>
+            <id>Mitsugaru</id>
+            <email>mitsugaru@gmail.com</email>
+            <url>https://github.com/Mitsugaru</url>
+            <timezone>-7</timezone>
+        </developer>
+    </developers>
+    <!-- Properties -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.mainclass>me.ryanhamshire.ExtraHardMode.ExtraHardMode</project.mainclass>
+    </properties>
+    <!-- Repositories -->
+    <repositories>
+        <repository>
+            <id>Bukkit</id>
+            <url>http://repo.bukkit.org/content/groups/public</url>
+        </repository>
+    </repositories>
+    <!-- Dependencies -->
+    <dependencies>
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>bukkit</artifactId>
+            <version>1.4.7-R1.0</version>
+        </dependency>
+    </dependencies>
+    <!-- Build instructions -->
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <defaultGoal>compile package</defaultGoal>
+        <sourceDirectory>${basedir}/src/</sourceDirectory>
+        <resources>
+            <resource>
+                <includes>
+                    <include>plugin.yml</include>
+                </includes>
+                <directory>${basedir}</directory>
+                <filtering>true</filtering>
+            </resource>
+            <!-- <resource> <includes> <include>LICENSE.txt</include> </includes> 
+                <directory>${basedir}</directory> </resource> -->
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

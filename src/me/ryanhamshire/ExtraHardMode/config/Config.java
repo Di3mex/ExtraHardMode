@@ -1,4 +1,4 @@
-package me.ryanhamshire.ExtraHardMode;
+package me.ryanhamshire.ExtraHardMode.config;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Material;
@@ -31,12 +31,14 @@ import java.util.logging.Logger;
 @SuppressWarnings("unused")
 public class Config {
 
+   private final static String dataLayerFolderPath = "plugins" + File.separator + "ExtraHardMode";
+   
     private static transient Plugin plugin = null;
     private static transient Logger logger;
     private static transient boolean logVerbose = false;
 
     private static transient FileConfiguration config;
-    private static transient String configPath = DataStore.configFilePath;
+    private static transient String configPath = dataLayerFolderPath + File.separator + "config.yml";
     private static transient File configFile = new File (configPath);
 
     /**This saves the defaults and restores them on a reload, static variables don't get cleared on a reload**/

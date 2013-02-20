@@ -16,24 +16,38 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.ryanhamshire.ExtraHardMode;
+package me.ryanhamshire.ExtraHardMode.task;
 
 import org.bukkit.Location;
 
+/**
+ * Creates an explosion of specified power at the target location.
+ */
 public class CreateExplosionTask implements Runnable {
+   /**
+    * Location of explosion.
+    */
+   private Location location;
+   /**
+    * Power of explosion.
+    */
+   private float power;
 
-	private Location location;
-	private float power;
-	
-	public CreateExplosionTask(Location location, float power)
-	{
-		this.location = location;
-		this.power = power;
-	}
+   /**
+    * Constructor.
+    * 
+    * @param location
+    *           - Location to make explosion occur.
+    * @param power
+    *           - Power of resulting explosion.
+    */
+   public CreateExplosionTask(Location location, float power) {
+      this.location = location;
+      this.power = power;
+   }
 
-	@Override
-	public void run()
-	{
-		this.location.getWorld().createExplosion(this.location, this.power);
-	}
+   @Override
+   public void run() {
+      this.location.getWorld().createExplosion(this.location, this.power);
+   }
 }

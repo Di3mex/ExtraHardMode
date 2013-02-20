@@ -1,10 +1,53 @@
-name: ExtraHardMode
-main: me.ryanhamshire.ExtraHardMode.ExtraHardMode
+name: ${project.artifactId}
+main: ${project.mainclass}
+version: ${project.version}
+description: ${project.description}
+website: ${project.url}
 softdepend: [Multiverse-Core, My Worlds, MystCraft, Transporter]
-dev-url: http://dev.bukkit.org/server-mods/fun-hard-mode
-version: 2.5.2
+authors: [bigscary, Diemex, Mitsugaru]
 commands:
+    ehm:
+        description: Root command for ExtraHardMode
+        usage: /ehm - Show the main menu
 permissions:
-    extrahardmode.bypass:
+    ExtraHardMode.*:
+        description: Grant ALL the permission nodes
+        default: op
+        children:
+           ExtraHardMode.admin: true
+           ExtraHardMode.bypass: true
+           ExtraHardMode.silent.stone_mining_help: true
+           ExtraHardMode.silent.no_placing_ore_against_stone: true
+           ExtraHardMode.silent.realistic_building: true
+           ExtraHardMode.silent.limited_torch_placement: true
+           ExtraHardMode.silent.no_torches_here: true
+    ExtraHardMode.admin:
+        description: Grants user ability to administrate the plugin.
+        default: op
+    ExtraHardMode.bypass:
         description: Grants bypass permission for some extra hard mode rules.
+        default: op
+    ExtraHardMode.silent.*:
+        description: Grants ALL silent permission nodes
+        default: op
+        children:
+           ExtraHardMode.silent.stone_mining_help: true
+           ExtraHardMode.silent.no_placing_ore_against_stone: true
+           ExtraHardMode.silent.realistic_building: true
+           ExtraHardMode.silent.limited_torch_placement: true
+           ExtraHardMode.silent.no_torches_here: true
+    ExtraHardMode.silent.stone_mining_help:
+        description: hides the stone mining help message
+        default: op
+    ExtraHardMode.silent.no_placing_ore_against_stone:
+        description: hides the no placing ore against stone message
+        default: op
+    ExtraHardMode.silent.realistic_building:
+        description: hides the realisting building message
+        default: op
+    ExtraHardMode.silent.limited_torch_placement:
+        description: hides the limited torch placement message
+        default: op
+    ExtraHardMode.silent.no_torches_here:
+        description: hides the no torches here message
         default: op

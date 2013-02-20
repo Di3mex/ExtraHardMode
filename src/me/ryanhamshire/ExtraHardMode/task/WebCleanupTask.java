@@ -16,37 +16,45 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.ryanhamshire.ExtraHardMode;
+package me.ryanhamshire.ExtraHardMode.task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 
+/**
+ * Called to cleanup webs near an entity.
+ */
 public class WebCleanupTask implements Runnable {
 
-	private ArrayList<Block> webs;
-	
-	public WebCleanupTask(ArrayList<Block> changedBlocks)
-	{
-		this.webs = changedBlocks;
-	}
+   /**
+    * List of blocks to check.
+    */
+   private final List<Block> webs = new ArrayList<>();
 
-	@Override
-	public void run()
-	{
-		for(int i = 0; i < webs.size(); i++)
-		{
-			Block web = webs.get(i);
-			
-			//don't load a chunk just to clean up webs
-			if(!web.getChunk().isLoaded()) continue;
-			
-			//only turn webs to air.  there's a chance the web may have been replaced since it was placed.
-			if(web.getType() == Material.WEB)
-			{
-				web.setType(Material.AIR);
-			}
-		}
-	}
+   /**
+    * Constructor.
+    * 
+    * @param changedBlocks
+    *           - Block to check.
+    */
+   public WebCleanupTask(List<Block> changedBlocks) {
+      this.webs.addAll(changedBlocks);
+   }
+
+   @Override
+   public void run() {
+      for(Block block : webs) {
+         // don't load a chunk just to clean up webs
+         if(!block.getChunk().isLoaded()) {
+            continue;
+         } else if(block.getType() == Material.WEB) {
+            // only turn webs to air. there's a chance the web may have been
+            // replaced since it was placed.
+            block.setType(Material.AIR);
+         }
+      }
+   }
 }

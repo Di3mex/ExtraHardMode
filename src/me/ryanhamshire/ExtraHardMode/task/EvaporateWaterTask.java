@@ -16,27 +16,36 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.ryanhamshire.ExtraHardMode;
+package me.ryanhamshire.ExtraHardMode.task;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 
+/**
+ * Changes a water source block to a non-source block, allowing it to spread and
+ * evaporate away.
+ */
 public class EvaporateWaterTask implements Runnable {
 
-	private Block block;
-	
-	public EvaporateWaterTask(Block block)
-	{
-		this.block = block;
-	}
+   /**
+    * Target block.
+    */
+   private Block block;
 
-	@Override
-	public void run()
-	{
-		//changes a water source block to a non-source block, allowing it to spread and evaporate away
-		if(this.block.getType() == Material.STATIONARY_WATER)
-		{
-			this.block.setData((byte)1);
-		}
-	}
+   /**
+    * Constructor.
+    * 
+    * @param block
+    *           - Target block.
+    */
+   public EvaporateWaterTask(Block block) {
+      this.block = block;
+   }
+
+   @Override
+   public void run() {
+      if(this.block.getType() == Material.STATIONARY_WATER) {
+         this.block.setData((byte) 1);
+      }
+   }
 }
