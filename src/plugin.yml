@@ -32,7 +32,7 @@ permissions:
            ExtraHardMode.bypass.bypass: true
     ExtraHardMode.bypass.bypass:
         description: Old permission that will be replaced by subpermissions
-        default:op
+        default: op
     ExtraHardMode.bypass.creepers:
         description: Player with this permission will bypass all creeper features, but the flaming creepers
         default: op
