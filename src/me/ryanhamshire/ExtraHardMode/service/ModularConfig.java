@@ -29,7 +29,6 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author Mitsugaru
  */
-@SuppressWarnings("SameParameterValue")
 public abstract class ModularConfig extends EHMModule
 {
     /**

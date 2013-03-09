@@ -49,6 +49,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 //TODO create variables that hold all the materials, like an array for all natural blocks, etc. Makes it easy if a new block is introduced.
@@ -102,8 +103,16 @@ public class EntityEventHandler implements Listener
     public void onExplosion(EntityExplodeEvent event)
     {
         World world = event.getLocation().getWorld();
-        if (!rootC.getStringList(RootNode.WORLDS).contains(world.getName()))
+        if (!rootC.getStringList(RootNode.WORLDS).contains(world.getName())) {
             return;
+        }
+        
+        // Check on the y coordinate limit in the config.
+        int maxY = rootC.getInt(RootNode.EXPLOSION_MAX_HEIGHT);
+        if(event.getLocation().getY() >= maxY) {
+           event.setCancelled(true);
+           return;
+        }
 
         EntityModule module = plugin.getModuleForClass(EntityModule.class);
 
@@ -223,6 +232,16 @@ public class EntityEventHandler implements Listener
                 BlockModule physics = plugin.getModuleForClass(BlockModule.class);
                 physics.physicsCheck(block, 0, true);
             }
+        }
+        
+        //Protect blocks if enabled
+        if(rootC.getBoolean(RootNode.EXPLOSION_PROTECT_ABOVE_MAX)) {
+           Iterator<Block> iterator = event.blockList().iterator();
+           while(iterator.hasNext()) {
+              if(iterator.next().getLocation().getY() >= maxY) {
+                 iterator.remove();
+              }
+           }
         }
 
         // FEATURE: more powerful ghast fireballs

@@ -29,7 +29,6 @@ import java.util.Map;
  * Abstract class to handle the majority of the logic dealing with commands.
  * Allows for a nested structure of commands.
  */
-@SuppressWarnings("SameParameterValue")
 public abstract class CommandHandler implements CommandExecutor
 {
     /**

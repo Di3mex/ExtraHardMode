@@ -20,18 +20,13 @@ import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.meta.FireworkMeta;
-import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.util.Vector;
 
 /**
  * Put all the Utility Stuff here that doesn't fit into the other modules
  */
-@SuppressWarnings("SameParameterValue")
 public class UtilityModule extends EHMModule
 {
     /**

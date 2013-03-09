@@ -37,8 +37,14 @@ public enum RootNode implements ConfigNode
      */
     DISABLE_EXPLOSIONS
             ("ExtraHardMode.Plugin.Disable Explosions", VarType.BOOLEAN, false),
-
-
+    /**
+     * Max Y that explosions will have an effect on blocks.
+     */
+    EXPLOSION_MAX_HEIGHT("ExtraHardMode.Plugin.Explosion.Max Y", VarType.INTEGER, 64),
+    /**
+     * Protecteed blocks from breaking on explosion at and above max height
+     */
+    EXPLOSION_PROTECT_ABOVE_MAX("ExtraHardMode.Plugin.Explosion.Protect", VarType.BOOLEAN, true),
     /**
      * whether stone is hardened to encourage cave exploration over tunneling
      */
