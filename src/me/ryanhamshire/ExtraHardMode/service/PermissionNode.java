@@ -28,6 +28,10 @@ public enum PermissionNode
      */
     BYPASS_CREEPERS("bypass.creepers"),
     /**
+     * Inventory
+     */
+    BYPASS_INVENTORY("bypass.inventory"),
+    /**
      * Admin.
      */
     ADMIN("admin"),

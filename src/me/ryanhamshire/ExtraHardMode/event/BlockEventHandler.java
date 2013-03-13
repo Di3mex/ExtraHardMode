@@ -41,6 +41,7 @@ import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.event.world.StructureGrowEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Torch;
+import org.bukkit.Material;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
@@ -145,21 +146,29 @@ public class BlockEventHandler implements Listener
                 // otherwise, drastically reduce tool durability when breaking stone
                 else
                 {
-                    short amount;
-
+                    int amount;
+                    
                     if (tool == Material.IRON_PICKAXE)
-                        amount = 8;
+                        amount = rootC.getInt(RootNode.IRON_DURABILITY_PENALTY);
                     else
-                        amount = 22;
+                        amount = rootC.getInt(RootNode.DIAMOND_DURABILITY_PENALTY);
 
-                    inHandStack.setDurability((short) (inHandStack.getDurability() + amount));
+                    int maxDurability = tool.getMaxDurability();
+                    int damagePerBlock = maxDurability / amount;
+                    
+                    inHandStack.setDurability((short) (inHandStack.getDurability() + damagePerBlock));
+              
+                    // For cases where a remainder causes the tool to be viable for an extra use,
+                    //   eat up the remainder of thet durability
+                    if ( maxDurability - inHandStack.getDurability() < tool.getMaxDurability() / amount )
+                        inHandStack.setDurability((short) maxDurability);
                 }
             }
         }
 
         // when ore is broken, it softens adjacent stone
         // important to ensure players can reach the ore they break
-        if (rootC.getBoolean(RootNode.SUPER_HARD_STONE_PHYSICS) && (block.getType().name().endsWith("ORE") || block.getType().name().endsWith("ORES")))
+        if ( rootC.getBoolean(RootNode.SUPER_HARD_STONE_PHYSICS) && ( (block.getType().name().endsWith("ORE") || block.getType().name().endsWith("ORES")) || ( rootC.getBoolean(RootNode.STONE_LIKE_ORE) && block.getType().name().equalsIgnoreCase("STONE")) ) )
         {
             for (BlockFace face : blockFaces)
             {

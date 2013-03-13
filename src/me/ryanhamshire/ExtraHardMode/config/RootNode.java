@@ -45,10 +45,22 @@ public enum RootNode implements ConfigNode
     SUPER_HARD_STONE
             ("ExtraHardMode.World Rules.Mining.Inhibit Tunneling", VarType.BOOLEAN, true),
     /**
+     * The next two entries configure how much extra durability loss iron and diamond picks take when SUPER_HARD_STONE is TRUE
+     */
+    IRON_DURABILITY_PENALTY
+            ("ExtraHardMode.World Rules.Mining.If Tunneling Is Inhibited.Number of Stone Iron Pickaxe Can Mine", VarType.INTEGER, 32),
+    DIAMOND_DURABILITY_PENALTY
+            ("ExtraHardMode.World Rules.Mining.If Tunneling Is Inhibited.Number of Stone Diamond Pickaxe Can Mine", VarType.INTEGER, 71),
+    /**
      * Breaking an ore will cause surrounding stone to turn to cobble and fall
      */
     SUPER_HARD_STONE_PHYSICS
-            ("ExtraHardMode.World Rules.Mining.Breaking Ore Softens Stone", VarType.BOOLEAN, true),
+            ("ExtraHardMode.World Rules.Mining.Breaking Ore Softens Adjacent Stone", VarType.BOOLEAN, true),
+    /**
+     * When true, and when used with SUPER_HARD_STONE, mining stone will cause adjacent stone to turn to cobble, as if mining ore
+     */
+    STONE_LIKE_ORE
+            ("ExtraHardMode.World Rules.Mining.If Breaking Ore Softens Stone.Breaking Stone Also Softens Adjacent Stone", VarType.BOOLEAN, true),
     /**
      * maximum y for placing standard torches
      */
@@ -310,11 +322,16 @@ public enum RootNode implements ConfigNode
     ALWAYS_ANGRY_PIG_ZOMBIES
             ("ExtraHardMode.PigZombies.Always Angry", VarType.BOOLEAN, true),
     /**
-     * whether pig zombies drop nether wart in nether fortresses
+     * whether pig zombies always drop nether wart in nether fortresses
      */
     FORTRESS_PIGS_DROP_WART
-            ("ExtraHardMode.PigZombies.Drop Netherwart In Fortresses", VarType.BOOLEAN, true),
-
+            ("ExtraHardMode.PigZombies.Always Drop Netherwart In Fortresses", VarType.BOOLEAN, true),
+    /**
+     * Whether pig zombies should drop netherwart occasionally elsewhere in Nether
+     */
+    NETHER_PIGS_DROP_WART
+            ("ExtraHardMode.PigZombies.Percent Chance to Drop Netherwart Elsewhere In Nether", VarType.INTEGER, 0),
+    
     /**
      * whether ghasts should deflect arrows and drop extra loot
      * percentage like skeleton deflect

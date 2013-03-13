@@ -1,11 +1,9 @@
 name: ExtraHardMode
 main: me.ryanhamshire.ExtraHardMode.ExtraHardMode
-version: 3.2.1
+version: 3.1.1
 description: New game rules and mechanics for Minecraft.
 website: http://dev.bukkit.org/server-mods/fun-hard-mode
 authors: [bigscary, Diemex, Mitsugaru]
-#ensure that we are loaded after multiworld plugins
-softdepend: [Multiverse-Core, My Worlds, MystCraft, Transporter]
 commands:
     ehm:
         description: Root command for ExtraHardMode

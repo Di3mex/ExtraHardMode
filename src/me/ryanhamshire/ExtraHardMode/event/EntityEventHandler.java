@@ -53,6 +53,7 @@ import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 //TODO create variables that hold all the materials, like an array for all natural blocks, etc. Makes it easy if a new block is introduced.
 /**
@@ -654,7 +655,7 @@ public class EntityEventHandler implements Listener
         if (entity instanceof Player)
         {
             Player player = (Player) entity;
-            if (!player.hasPermission(PermissionNode.BYPASS.getNode()))
+            if (!player.hasPermission(PermissionNode.BYPASS_INVENTORY.getNode()))
             {
                 List<ItemStack> drops = event.getDrops();
                 int numberOfStacksToRemove = (int) (drops.size() * (rootC.getInt(RootNode.PLAYER_DEATH_ITEM_STACKS_FORFEIT_PERCENT) / 100f));
@@ -722,6 +723,12 @@ public class EntityEventHandler implements Listener
             {
                 event.getDrops().add(new ItemStack(Material.NETHER_STALK));
             }
+        }
+        // FEATURE: pig zombies sometimes drop nether wart when slain elsewhere 
+        else if (rootC.getInt(RootNode.NETHER_PIGS_DROP_WART) > 0 && world.getEnvironment().equals(Environment.NETHER) && entity instanceof PigZombie)
+        {
+            if (plugin.random(rootC.getInt(RootNode.NETHER_PIGS_DROP_WART)))
+                event.getDrops().add(new ItemStack(Material.NETHER_STALK));
         }
 
         // FEATURE: nether blazes drop extra loot (glowstone and gunpowder)
