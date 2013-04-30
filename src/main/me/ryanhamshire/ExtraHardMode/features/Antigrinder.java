@@ -61,7 +61,7 @@ public class Antigrinder implements Listener
         if (inhibitMonsterGrindersEnabled)
         {
             // spawners and spawn eggs always spawn a monster, but the monster doesn't drop any loot
-            if (reason == CreatureSpawnEvent.SpawnReason.SPAWNER && blazeBonusSpawnPercent > 0 || !(entity instanceof Blaze))
+            if (reason == CreatureSpawnEvent.SpawnReason.SPAWNER && !((entity instanceof Blaze)) && blazeBonusSpawnPercent <= 0)
             {
                 entityModule.markLootLess(entity);
             }
