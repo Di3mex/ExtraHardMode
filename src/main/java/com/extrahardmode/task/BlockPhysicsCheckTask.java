@@ -92,11 +92,14 @@ public class BlockPhysicsCheckTask implements Runnable
 
         final boolean fallingBlocksEnabled = CFG.getBoolean(RootNode.MORE_FALLING_BLOCKS_ENABLE, block.getWorld().getName());
         final Map<Integer, List<Byte>> fallingBlocks = CFG.getMappedNode(RootNode.MORE_FALLING_BLOCKS, block.getWorld().getName());
+        final Map<Integer, List<Byte>> breakableByFallingBlocks = CFG.getMappedNode(RootNode.BREAKABLE_BY_FALLING_BLOCKS, block.getWorld().getName());
 
         Material material = block.getType();
         Block underBlock = block.getRelative(BlockFace.DOWN);
 
-        if ((underBlock.getType() == Material.AIR || underBlock.isLiquid() || underBlock.getType() == Material.TORCH)
+        if ((underBlock.getType() == Material.AIR || underBlock.isLiquid() ||
+                /* Blocks that get broken by falling blocks */
+                (breakableByFallingBlocks.containsKey(underBlock.getTypeId()) && (breakableByFallingBlocks.get(underBlock.getTypeId()).isEmpty() || breakableByFallingBlocks.get(underBlock.getTypeId()).contains(block.getData()))))
                 && (material == Material.SAND || material == Material.GRAVEL ||
                 /* Our extra blocks */
                 (fallingBlocks.containsKey(material.getId()) && (fallingBlocks.get(material.getId()).isEmpty() || fallingBlocks.get(material.getId()).contains(block.getData()))))
