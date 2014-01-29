@@ -330,6 +330,7 @@ public class RootConfig extends MultiWorldConfig
                     break;
                 }
                 case MORE_FALLING_BLOCKS:
+                case BREAKABLE_BY_FALLING_BLOCKS:
                 case SUPER_HARD_STONE_TOOLS:
                 case SUPER_HARD_STONE_PHYSICS_BLOCKS:
                 {
@@ -389,7 +390,8 @@ public class RootConfig extends MultiWorldConfig
         {
             switch (node)
             {
-                case MORE_FALLING_BLOCKS:
+            	case MORE_FALLING_BLOCKS:
+            	case BREAKABLE_BY_FALLING_BLOCKS:
                 {
                     reorderedConfig.set(node.getPath(),
                             SpecialParsers.convertToStringList(

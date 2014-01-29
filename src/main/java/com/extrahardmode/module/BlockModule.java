@@ -118,9 +118,9 @@ public class BlockModule extends EHMModule
         CompatHandler.logFallingBlockFall(block);
         block.setType(Material.AIR);
 
-        final boolean breakTorches = CFG.getBoolean(RootNode.MORE_FALLING_BLOCKS_BREAK_TORCHES, block.getWorld().getName());
+        final boolean breakBlocks = CFG.getBoolean(RootNode.MORE_FALLING_BLOCKS_BREAK_BLOCKS, block.getWorld().getName());
         //TODO expand on this, it's only rudimentary, doesnt break torches if there are multiple fallingblocks (only breaks the first)
-        if (breakTorches)
+        if (breakBlocks)
         {
             Block current = block;
             Block below = block.getRelative(BlockFace.DOWN);

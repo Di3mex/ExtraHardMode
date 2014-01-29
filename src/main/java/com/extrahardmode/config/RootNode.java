@@ -566,7 +566,7 @@ public enum RootNode implements ConfigNode
     /**
      * Should Falling Blocks break torches when they land
      */
-    MORE_FALLING_BLOCKS_BREAK_TORCHES("Additional Falling Blocks.Break Torches", VarType.BOOLEAN, true),
+    MORE_FALLING_BLOCKS_BREAK_BLOCKS("Additional Falling Blocks.Break Blocks", VarType.BOOLEAN, true),
     /**
      * Cascading falling blocks
      */
@@ -583,6 +583,10 @@ public enum RootNode implements ConfigNode
      * which materials beyond sand and gravel should be subject to gravity
      */
     MORE_FALLING_BLOCKS("Additional Falling Blocks.Enabled Blocks", VarType.LIST, new DefaultFallingBlocks()),
+    /**
+     * which materials should Falling Blocks break
+     */
+    BREAKABLE_BY_FALLING_BLOCKS("Additional Falling Blocks.Breakable Blocks", VarType.LIST, new DefaultBreakableByFallingBlocks()),
 
     /**
      * ##############################
@@ -1056,6 +1060,31 @@ public enum RootNode implements ConfigNode
             this.add(Material.STEP.toString() + "@3");
             this.add(Material.STEP.toString() + "@11");
             this.add(Material.MYCEL.toString());
+        }
+    }
+
+
+    /**
+     * Default list of blocks breakable by falling blocks.
+     */
+    private static class DefaultBreakableByFallingBlocks extends ArrayList<String>
+    {
+
+        /**
+         * Serial Version UID.
+         */
+        private static final long serialVersionUID = 1L;
+
+
+        /**
+         * Constructor.
+         */
+        public DefaultBreakableByFallingBlocks()
+        {
+            super();
+            this.add(Material.SAPLING.toString());
+            this.add(Material.TORCH.toString());
+            this.add(Material.FIRE.toString());
         }
     }
 
