@@ -30,6 +30,23 @@ public class DebugCommand implements ICommand
                         plugin.getServer().getScheduler().runTask(plugin, new RemoveExposedTorchesTask(plugin, player.getLocation().getChunk(), true));
                         sender.sendMessage(ChatColor.GREEN + plugin.getTag() + "Removed Torches and Crops in the current chunk!");
                     }
+                    else if (args[0].equals("logging"))
+                    {
+	                    boolean debug = false;
+	                    if(args.length < 2)
+	                    	debug = true;
+	                    else
+	                    {
+		                    try{
+		                    	debug = Boolean.parseBoolean(args[1]);
+		                    } catch(Exception e)
+		                    {
+		                    	sender.sendMessage(ChatColor.RED + plugin.getTag() + "Second argument must be 'true' or 'false'!");
+		                    }
+	                    }
+	                    ExtraHardMode.debug = debug;
+	                    sender.sendMessage(ChatColor.GOLD + plugin.getTag() + "Set debug logging to: "+debug+"!");
+                    }
                     return true;
                 } else
                 {

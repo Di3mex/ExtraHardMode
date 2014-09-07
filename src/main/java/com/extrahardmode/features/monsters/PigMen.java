@@ -27,12 +27,14 @@ import com.extrahardmode.config.RootConfig;
 import com.extrahardmode.config.RootNode;
 import com.extrahardmode.module.EntityHelper;
 import com.extrahardmode.service.ListenerModule;
+
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -84,13 +86,33 @@ public class PigMen extends ListenerModule
         // FEATURE: pig zombies drop nether wart when slain in nether fortresses
         if (world.getEnvironment().equals(World.Environment.NETHER) && entity instanceof PigZombie)
         {
+        	//Take into Account Looting swords
+        	int dropScale = 1;
+        	Entity damager = event.getEntity().getKiller();
+        	if (damager instanceof Player){
+        		ItemStack inHand = ((Player) damager).getItemInHand();
+        		if(inHand!=null && inHand.getEnchantments().containsKey(Enchantment.LOOT_BONUS_MOBS))
+        		{
+        			dropScale += inHand.getEnchantments().get(Enchantment.LOOT_BONUS_MOBS);
+        		}
+        	}
+        	
             Block underBlock = entity.getLocation().getBlock().getRelative(BlockFace.DOWN);
-            if (pigWartFortress && underBlock.getType() == Material.NETHER_BRICK)
-                event.getDrops().add(new ItemStack(Material.NETHER_STALK));
-
+            if (pigWartFortress && underBlock.getType() == Material.NETHER_BRICK){
+            	ItemStack drop = new ItemStack(Material.NETHER_STALK);
+            	drop.setAmount(dropScale);
+            	event.getDrops().add(drop);
+            }
                 // FEATURE: pig zombies sometimes drop nether wart when slain elsewhere
-            else if (pigWartDropEveryWherePercent > 0 && plugin.random(pigWartDropEveryWherePercent))
-                event.getDrops().add(new ItemStack(Material.NETHER_STALK));
+            else if (pigWartDropEveryWherePercent > 0){
+            	for(int i=0;i<dropScale;i++)
+            	{
+            		if(plugin.random(pigWartDropEveryWherePercent))
+            		{
+            			event.getDrops().add(new ItemStack(Material.NETHER_STALK));
+            		}
+            	}
+            }
         }
     }
 

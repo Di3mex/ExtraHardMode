@@ -60,7 +60,9 @@ public class EvaporateWaterTask implements Runnable
     @Override
     public void run()
     {
-        if (block.getType() == Material.STATIONARY_WATER || block.getType() == Material.WATER)
+    	boolean isWater = block.getType() == Material.STATIONARY_WATER || block.getType() == Material.WATER;
+    	boolean isLava = block.getType() == Material.STATIONARY_LAVA || block.getType() == Material.LAVA;
+        if (isWater || isLava)
         {
             block.setData((byte) 1);
             //Finished processing

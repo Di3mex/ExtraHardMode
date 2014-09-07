@@ -41,14 +41,25 @@ import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
-
+import java.util.logging.Logger;
 
 /**
  * Main plugin class.
  */
 public class ExtraHardMode extends JavaPlugin
 {
-
+	public static boolean debug = false;
+	private static final Logger log_ = Logger.getLogger("ExtraHardMode");
+	public static void info(String message)
+	{
+		log_.info("[ExtraHardMode] "+message);
+	}
+	
+	private static void debug(String message)
+	{
+		if(debug)
+			log_.info("[ExtraHardMode] "+message);
+	}
     /**
      * Plugin tag.
      */

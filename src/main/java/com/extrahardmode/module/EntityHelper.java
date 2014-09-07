@@ -63,7 +63,7 @@ public class EntityHelper
      */
     public static void markLootLess(Plugin plugin, LivingEntity entity)
     {
-        entity.setMetadata(ENVIRONMENTAL_DAMAGE, new FixedMetadataValue(plugin, entity.getMaxHealth()));
+        entity.setMetadata(ENVIRONMENTAL_DAMAGE, new FixedMetadataValue(plugin, ((Damageable)entity).getMaxHealth()));
     }
 
 
@@ -97,7 +97,7 @@ public class EntityHelper
         if (meta.size() > 0)
             currentTotalDamage = meta.get(0).asDouble();
         // wither is exempt. he can't be farmed because creating him requires combining non-farmable components
-        return !(entity instanceof Wither) && (currentTotalDamage > entity.getMaxHealth() / 2.0);
+        return !(entity instanceof Wither) && (currentTotalDamage > ((Damageable)entity).getMaxHealth() / 2.0);
     }
 
 

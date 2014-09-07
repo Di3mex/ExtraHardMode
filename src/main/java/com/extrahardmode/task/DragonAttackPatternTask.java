@@ -25,7 +25,9 @@ package com.extrahardmode.task;
 
 import com.extrahardmode.ExtraHardMode;
 import com.extrahardmode.config.RootConfig;
+
 import org.bukkit.World;
+import org.bukkit.entity.Damageable;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
@@ -54,7 +56,7 @@ public class DragonAttackPatternTask implements Runnable
     /**
      * Dragon entity.
      */
-    private final LivingEntity dragon;
+    private final Damageable dragon;
 
 
 

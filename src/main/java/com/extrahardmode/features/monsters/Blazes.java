@@ -238,7 +238,7 @@ public class Blazes extends ListenerModule
             {
                 Blaze blaze = (Blaze) entity;
 
-                if (blaze.getHealth() > blaze.getMaxHealth() / 2)
+                if (((Damageable)blaze).getHealth() > ((Damageable)blaze).getMaxHealth() / 2)
                 {
 
                     Block block = entity.getLocation().getBlock();

@@ -360,7 +360,7 @@ public class Glydia extends ListenerModule
             // if he's there, full health
             if (enderDragon != null)
             {
-                enderDragon.setHealth(enderDragon.getMaxHealth());
+                enderDragon.setHealth(((Damageable)enderDragon).getMaxHealth());
             }
 
             // otherwise, spawn one
@@ -426,7 +426,7 @@ public class Glydia extends ListenerModule
         {
             Fireball fireball = (Fireball) entity;
             Entity spawnedMonster = null;
-            if (fireball.getShooter() != null && EntityHelper.shooterType(fireball) == EntityType.ENDER_DRAGON)
+            if (((Projectile)fireball).getShooter() != null && EntityHelper.shooterType(fireball) == EntityType.ENDER_DRAGON)
             {
                 int random = plugin.getRandom().nextInt(100);
                 if (random < 40)
