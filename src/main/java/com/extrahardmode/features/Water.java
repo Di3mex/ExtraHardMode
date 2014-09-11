@@ -91,7 +91,7 @@ public class Water extends ListenerModule
         Block fromBlock = from.getBlock();
         Block toBlock = to.getBlock();
 
-        final boolean noSwimingInArmor = CFG.getBoolean(RootNode.NO_SWIMMING_IN_ARMOR, world.getName());
+        final boolean noSwimmingInArmor = CFG.getBoolean(RootNode.NO_SWIMMING_IN_ARMOR, world.getName());
         final boolean playerBypasses = playerModule.playerBypasses(player, Feature.MONSTER_GLYDIA);
         final boolean blockWaterElevators = CFG.getBoolean(RootNode.NO_SWIMMING_IN_ARMOR_BLOCK_ELEVATORS, world.getName());
 
@@ -107,7 +107,7 @@ public class Water extends ListenerModule
         final float overwaterDrownVel = -0.7F;
 
         // FEATURE: no swimming while heavy, only enabled worlds, players without bypass permission and not in creative
-        if (noSwimingInArmor && !playerBypasses)
+        if (noSwimmingInArmor && !playerBypasses)
         {
             // only care about moving up
             if (to.getY() > from.getY())
