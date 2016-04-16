@@ -9,7 +9,7 @@ build: 57
 > --George S. Patton
 
 ## Useful Links
- [Materials in Bukkit >](http://jd.bukkit.org/rb/apidocs/org/bukkit/Material.html)
+ [Materials in Bukkit >](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html)
  [Minecraft ids >](http://minecraft.gamepedia.com/Data_values)
 
 ## Setup
