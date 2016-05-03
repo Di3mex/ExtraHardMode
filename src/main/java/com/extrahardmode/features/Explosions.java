@@ -136,7 +136,7 @@ public class Explosions extends ListenerModule
             if (customGhastExplosion)
             {
                 Fireball fireball = (Fireball) sourceEntity;
-                if (fireball.getShooter() instanceof Ghast)
+                if (((Projectile)fireball).getShooter() instanceof Ghast)
                 {
                     event.setCancelled(true);
                     // same as vanilla TNT, plus fire

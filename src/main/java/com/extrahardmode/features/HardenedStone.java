@@ -37,9 +37,11 @@ import com.extrahardmode.service.PermissionNode;
 import com.extrahardmode.service.config.customtypes.BlockRelationsList;
 import com.extrahardmode.service.config.customtypes.BlockType;
 import com.extrahardmode.service.config.customtypes.BlockTypeList;
+
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -89,7 +91,9 @@ public class HardenedStone extends ListenerModule
     /**
      * When a player breaks stone
      */
-    @EventHandler
+    //Give other people chance to stop event before you damage pickaxe!
+    //Also if a plugin cancels it, then don't damage pickaxe or do physics
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event)
     {
         Block block = event.getBlock();
@@ -100,7 +104,7 @@ public class HardenedStone extends ListenerModule
         final boolean hardStonePhysix = CFG.getBoolean(RootNode.SUPER_HARD_STONE_PHYSICS, world.getName());
         final boolean applyPhysics = CFG.getBoolean(RootNode.SUPER_HARD_STONE_PHYSICS_APPLY, world.getName());
         final boolean playerBypasses = playerModule.playerBypasses(player, Feature.HARDENEDSTONE);
-
+        
         final BlockTypeList tools = CFG.getBlocktypeList(RootNode.SUPER_HARD_STONE_TOOLS, world.getName());
         final BlockTypeList physicsBlocks = CFG.getBlocktypeList(RootNode.SUPER_HARD_STONE_ORE_BLOCKS, world.getName());
         final BlockRelationsList stoneBlocks = CFG.getBlockRelationList(RootNode.SUPER_HARD_STONE_STONE_BLOCKS, world.getName());
@@ -128,7 +132,17 @@ public class HardenedStone extends ListenerModule
                     // otherwise, drastically reduce tool durability when breaking stone
                     if (hardEvent.getNumOfBlocks() > 0)
                     {
-                        player.setItemInHand(UtilityModule.damage(hardEvent.getTool(), hardEvent.getNumOfBlocks()));
+                    	//Take into account Unbreaking
+                    	ItemStack inHand = hardEvent.getTool();
+                    	int unbreaking = 1;
+                    	if(inHand!=null && inHand.getEnchantments().containsKey(Enchantment.DURABILITY))
+                    	{
+                    		unbreaking += inHand.getEnchantments().get(Enchantment.DURABILITY);
+                    	}
+                    	int chanceToBreak = 100/unbreaking;
+                    	if(plugin.random(chanceToBreak)){
+                    		player.setItemInHand(UtilityModule.damage(hardEvent.getTool(), hardEvent.getNumOfBlocks()));
+                    	}
                     }
                 }
                 if (hardEvent.getNumOfBlocks() == 0)

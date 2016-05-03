@@ -80,6 +80,10 @@ public class LimitedBuilding extends ListenerModule
     {
         Player player = placeEvent.getPlayer();
         Block block = placeEvent.getBlock();
+    	//Allow tilling soil beneath you
+    	if(block.getType() == Material.SOIL)
+    		return;
+    	
         World world = block.getWorld();
 
         final boolean limitedBlockPlacement = CFG.getBoolean(RootNode.LIMITED_BLOCK_PLACEMENT, world.getName());
